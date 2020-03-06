@@ -1,5 +1,5 @@
 'use strict';
-
+// Alert user about comment submission success
 // Get the parameter from the URL
 // Disable linter for this line because web environment
 // isn't disabling node checks
