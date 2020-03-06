@@ -38,7 +38,7 @@ nunjucks.configure(app.get('views'), {
 });
 
 app.get('/', (request, response) => {
-	const options = { 
+	const options = {
 		pageTitle: 'Homepage',
 		logo: { url: 'assets/logo.png', description: 'Kink.com logo' },
 		upperimg: { url: 'assets/placeholder.png', description: 'Narwal with ball gag.' },
@@ -52,7 +52,7 @@ app.get('/', (request, response) => {
 app.post('/addComment', (request, response) => {
 	const comment = request.body.comment;
 	const username = request.body.username;
-	
+
 	let msg = db.add({ username, comment });
 	if (msg) {
 		logger.error(msg);
