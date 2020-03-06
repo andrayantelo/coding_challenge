@@ -10,6 +10,7 @@ $mobile-size: 768px;
 //  TODO @import is being phased out, but @use wasn't working
 @import 'scss/navbar';
 @import 'scss/section';
+@import 'scss/modal';
 
 
 body {
@@ -34,18 +35,6 @@ label,
 
 body {
     margin: 0px;
-}
-
-#message-div {
-    display: none;
-    height: 100%;
-    width: 100%;
-    background-color: $primary-bg;
-    color: $secondary-text-color;
-    position: absolute;
-    text-align: center;
-    font-size: 28px;
-    line-height: 500px;
 }
 
 #page-footer p {

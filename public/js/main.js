@@ -5,11 +5,17 @@
 // isn't disabling node checks
 const urlParams = new URLSearchParams(window.location.search);	// eslint-disable-line node/no-unsupported-features/node-builtins
 const msg = urlParams.get('message');
-const messageDiv = document.getElementById('message-div');
-messageDiv.innerText = msg;
+const modal = document.querySelector(".modal");
+function toggleModal() {
+	modal.classList.toggle("show-modal");
+}
+function windowOnClick(event) {
+	if (event.target === modal) {
+		toggleModal();
+	}
+}
 if (msg) {
-	messageDiv.style.display = 'block';
-	setTimeout(() => {
-		messageDiv.style.display = 'none';
-	}, 3000);
+  window.addEventListener("click", windowOnClick);
+  document.getElementById("modal-text").innerText = msg;
+  toggleModal();
 }
