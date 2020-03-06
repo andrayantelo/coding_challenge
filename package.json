@@ -4,15 +4,16 @@
   "description": "Frontend SASS Challenge",
   "main": "index.js",
   "scripts": {
-    "build:sass": "node-sass -r --output-style compressed scss/main.scss -o ./public/css",
+    "build:sass": "node-sass -r scss/main.scss -o ./public/css",
     "watch:sass": "npm run build:sass && npm run build:sass -- -w"
   },
-  "author": "YOURNAMEHERE <USERNAME@kink.com>",
+  "author": "Andrea Anaya <andreaanaya@kink.com>",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "morgan": "^1.9.1",
     "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
     "nunjucks": "^3.2.0",
     "winston": "^3.2.1"
   },

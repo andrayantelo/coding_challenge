@@ -1,14 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"> 
 	<title>{{ pageTitle }}</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
+    <!-- Navbar expected on every page -->
+    {% include 'navbar.njk' %}
 	{% block content %}{% endblock %}
-<footer>
-	{% block footer %}{% endblock %}
-</footer>
+    <footer id="page-footer">
+	    {% block footer %}{% endblock %}
+    </footer>
 </body>
 </html>

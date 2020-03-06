@@ -1,0 +1,109 @@
+.nav {
+	height: $navbar-height;
+	width: 100%;
+	background-color: $primary-bg;
+	position: relative;
+}
+
+.nav > .nav-header {
+    display: inline;
+}
+
+// Container for logo img
+.nav > .nav-header > .nav-logo {
+	display: inline-block;
+	padding: $logo-padding;
+}
+
+
+.nav > .nav-header > .nav-logo > .logo-img {
+	width: $logo-size;
+	height: $logo-size;
+}
+
+// Hamburger menu is hidden until resized
+.nav > .hamburger-btn {
+    display: none;
+}
+
+.nav > .nav-links {
+	display: inline;
+	float: right;
+	font-size: $nav-links-font-size;
+}
+
+.nav > .nav-links > a {
+	display: inline-block;
+	padding: 13px 10px 13px 10px;
+	text-decoration: none;
+	color: $secondary-text-color;
+}
+
+
+// This hidden checkbox tracks whether or not the nav hamburger menu
+// is open
+.nav > #nav-check {
+    display: none;
+}
+
+
+@media (max-width: $mobile-size) {
+    // This is the hamburger menu
+    .nav > .hamburger-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .nav > .hamburger-btn > label {
+        display: inline-block;
+        width: $navbar-height;
+        height: $navbar-height;
+        // space around the hamburger lines
+        padding: 13px;
+    }
+
+    // This is the label for the hamburger menu, clicking
+    // anywhere in the label checks the checkbox
+    .nav > .hamburger-btn > label:hover {
+		cursor: pointer;
+    }
+
+    // These are the horizontal lines in the hamburger menu
+    .nav > .hamburger-btn > label > span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid $secondary-text-color;
+    }
+
+    // Container for the links in the expanded hamburger menu
+    .nav > .nav-links {
+		position: absolute;
+		z-index: 1;
+        display: block;
+        width: 100%;
+		background-color: $primary-bg;
+        height: 0px;
+        transition: all 0.3s ease-in;
+        overflow-y: hidden;
+        top: $navbar-height;
+        left: 0px;
+    }
+    // These are the clickable links in the expanded hamburger menu
+    .nav > .nav-links > a {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid $secondary-text-color;
+    }
+
+    // Hide and show the menu depending on the checkbox
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+        height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+        height: calc(100vh - #{$navbar-height});
+        overflow-y: auto;
+    }
+}

@@ -1,5 +1,79 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-<h1>Hello, world!</h1>
+
+<div id="upper-section" class="section">
+    <div class="left">
+        <h2>Kink</h2>
+        <p class="upper-text">
+            Kink sexual practices go beyond what are considered conventional
+            sexual practices as a means of heightening the intimacy between
+            sexual partners. Some draw a distinction between kink and fetishism,
+            defining the former as enhancing partner intimacy, and the latter
+            as replacing it. Because of its relation to conformist sexual
+            boundaries, which themselves vary by time and place, the definition
+            of what is and is not kink varies widely as well. 
+            [<a href="https://en.wikipedia.org/wiki/Kink_(sexuality)"
+                aria-label="Kink Wikipedia article" title="Kink Wikipedia article">Wiki</a>]
+        </p>
+        <p>
+            Integer tortor risus, laoreet et tortor ac, interdum iaculis nisi.
+            Nulla et ultricies libero. In bibendum erat felis, mollis rutrum ante
+            vehicula at. Praesent venenatis sapien ligula, sit amet consectetur
+            justo feugiat vitae. Sed id congue libero. Mauris tincidunt in neque
+            hendrerit maximus. Maecenas congue tincidunt finibus. In aliquet porta
+            dolor, nec placerat leo facilisis eu. Praesent sodales ante libero,
+            nec gravida ex malesuada a. Interdum et malesuada fames ac ante ipsum
+            primis in faucibus.
+        </p>
+    </div>
+    <div class="right">
+        <img class="upper-img" src="{{ upperimg.url }}"
+            aria-label="{{ upperimg.description }}" />
+    </div>
+</div>
+
+<div id="lower-section" class="section">
+    <div class="left">
+        <form action="/addComment" method="POST">
+            <h2>Leave a comment</h2>
+            <label>Username:
+                <input type="text" id="username" name="username" required />
+            </label> 
+            <label>Comment:
+                <textarea id="comment" name="comment" maxlength="750" required></textarea>
+            </label>  
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="right">
+        <!-- Reverse order for newest first -->
+        {% for comment in comments | reverse %}
+        <div class="comment-display" aria-label="comment by user">
+            <blockquote>
+                <p>{{ comment.comment }}</p>
+                <footer class="username-display">
+                    <span aria-label="quoted user">— {{ comment.username }}</span>
+                </footer>
+            </blockquote>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Alert user about comment success -->
+<script>
+    // Get the parameter from the URL
+    let urlParams = new URLSearchParams(window.location.search);
+    const msg = urlParams.get('message');
+    if (msg) {
+        alert(msg);
+    }
+</script>
+
 {% endblock %}
+
+{% block footer %}
+    <p>No narwhals were harmed during the making of this website.</p>
+{% endblock %}
+

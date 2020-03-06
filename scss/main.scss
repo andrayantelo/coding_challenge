@@ -1,8 +1,20 @@
 $primary-bg: #000;
 $primary-text-color: #FF3B3B;
+$secondary-text-color: #eee;
+$navbar-height: 50px;
+$logo-size: 40px;
+$logo-padding: 10px;
+$nav-links-font-size: 18px;
+$mobile-size: 768px;
+
+//  TODO @import is being phased out, but @use wasn't working
+@import 'scss/navbar';
+@import 'scss/section';
+
 
 body {
-	background-color: $primary-bg
+	background-color: $primary-bg;
+	font-family: "Raleway";
 }
 
 h1,
@@ -10,6 +22,23 @@ h2,
 h3,
 h4,
 h5,
-p {
+p,
+label,
+.comment-display {
 	color: $primary-text-color;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+}
+
+#page-footer p {
+    color: $secondary-text-color;
+    text-align: center;
+    font-size: 0.625rem;
+}
+

@@ -1,0 +1,86 @@
+// Section styling
+// A section has two columns except in mobile view
+.section {
+	float: left;
+	position: relative;
+	clear: both;
+	padding: 15px;
+	width: 100%;
+}
+
+#upper-section {
+    padding-top: 20px;
+}
+
+.section > .left {
+    float: left;
+	width: 50%;
+}
+
+.section > .right {
+	float: right;
+	width: 50%;
+}
+
+.section > .right > .upper-img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+input[type=text], textarea {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type=submit] {
+	float: right;
+	background-color: $primary-text-color;
+	border: 0;
+	color: $secondary-text-color;
+	text-shadow: 1px 1px 2px $primary-bg;
+	border-radius: 2px;
+	cursor: pointer;
+	padding: 15px 20px;
+	margin: 5px 0px;
+	font-size: 22px;
+}
+
+.comment-display {
+	margin: 30px;
+}
+
+.username-display {
+	padding: 10px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+// Put quotes around the comments
+blockquote > p::before {
+	content: open-quote;
+  }
+blockquote > p::after {
+	content: close-quote;
+}
+blockquote {
+	quotes: "“" "”" "‘" "’";
+}
+
+// One column wide for mobile
+@media (max-width: $mobile-size) {
+	.section > .left {
+		clear: both;
+		width: 100%
+	}
+	.section > .right {
+		clear: both;
+		width: 100%;
+	}
+
+
+}
+
