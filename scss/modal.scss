@@ -1,3 +1,4 @@
+// Styling for the submission success message modal
 .modal {
     position: fixed;
     left: 0;
@@ -9,22 +10,22 @@
     visibility: hidden;
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-  }
-
-  .modal-content > h1 {
+}
+// Modal text styling
+.modal-content > h1 {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: $secondary-text-color;
     padding: 1rem 1.5rem;
     width: 24rem;
     border-radius: 0.5rem;
-  }
-
-  .show-modal {
+}
+// Toggle this class to show/hide modal
+.show-modal {
     opacity: 1;
     visibility: visible;
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-  }
+}
