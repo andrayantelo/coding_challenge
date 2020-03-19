@@ -1,13 +1,13 @@
 'use strict';
 
 // Handler for submitting a comment
-const submitButton = document.getElementById('submitButton');
+const commentForm = document.getElementById('commentForm');
 
 const onSubmit = (e) => {
 	e.preventDefault();
-	
+	//fetch('/addComment')
 }
-submitButton.addEventListener('click', onSubmit);
+commentForm.addEventListener('submit', onSubmit);
 
 // Alert user about comment submission success
 // Get the parameter from the URL

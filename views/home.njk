@@ -35,7 +35,7 @@
 
 <div id="lower-section" class="section">
     <div class="left">
-        <form action="/addComment" method="POST">
+        <form id="commentForm">
             <h2>Leave a comment</h2>
             <label>Username:
                 <input type="text" id="username" name="username" required />
@@ -43,7 +43,7 @@
             <label>Comment:
                 <textarea id="comment" name="comment" maxlength="750" required></textarea>
             </label>
-            <button id="submitButton">Submit</button>
+            <button class="submitButton" type="submit">Submit</button>
         </form>
     </div>
     <div class="right">
