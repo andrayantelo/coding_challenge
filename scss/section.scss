@@ -36,7 +36,7 @@ input[type=text], textarea {
     border-radius: 4px;
 }
 
-input[type=submit] {
+#submitButton {
 	float: right;
 	background-color: $primary-text-color;
 	border: 0;

@@ -1,5 +1,14 @@
 'use strict';
 
+// Handler for submitting a comment
+const submitButton = document.getElementById('submitButton');
+
+const onSubmit = (e) => {
+	e.preventDefault();
+	
+}
+submitButton.addEventListener('click', onSubmit);
+
 // Alert user about comment submission success
 // Get the parameter from the URL
 // Disable linter for this line because web environment
@@ -9,12 +18,12 @@ const msg = urlParams.get('message');
 const modal = document.querySelector('.modal');
 const toggleModal = () => {
 	modal.classList.toggle('show-modal');
-};
+}
 const windowOnClick = (event) => {
 	if (event.target === modal) {
 		toggleModal();
 	}
-};
+}
 if (msg) {
 	window.addEventListener('click', windowOnClick);
 	document.getElementById('modal-text').innerText = msg;
