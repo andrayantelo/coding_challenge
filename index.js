@@ -60,7 +60,8 @@ app.post('/addComment', (request, response) => {
 	} else {
 		msg = 'Thanks for commenting!';
 	}
-	return response.redirect(`/?message= + ${msg}`);
+	//return response.redirect(`/?message= + ${msg}`);
+	return response.send(msg);
 });
 
 app.listen(PORT, () => {
