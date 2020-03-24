@@ -1,20 +1,29 @@
 'use strict';
-// Alert user about comment submission success
-// Get the parameter from the URL
-// Disable linter for this line because web environment
-// isn't disabling node checks
-const urlParams = new URLSearchParams(window.location.search);	// eslint-disable-line node/no-unsupported-features/node-builtins
-const msg = urlParams.get('message');
+// function for toggling modal
 const modal = document.querySelector('.modal');
 const toggleModal = () => {
 	modal.classList.toggle('show-modal');
 }
+// event listener for clicking out of modal
 const windowOnClick = (event) => {
 	if (event.target === modal) {
 		toggleModal();
 	}
 }
 window.addEventListener('click', windowOnClick);
+
+// Dynamically render comments section
+const renderQuote = (comment, user) => {
+    return  `
+		<blockquote>
+			<p>${comment}</p>
+			<footer class="username-display">
+				<span aria-label="quoted user">- ${user}</span>
+			</footer>
+		</blockquote>
+	`;
+}
+
 // Handler for submitting a comment
 const commentForm = document.getElementById('commentForm');
 
@@ -31,14 +40,39 @@ commentForm.addEventListener('submit', function (e) {
 		method: 'POST',
 		body: searchParams
 	}).then(function (response) {
-		return response.text();
-	}).then(function (msg) {
-		if (msg) {
-			document.getElementById('modal-text').innerText = msg;
+		// if successfull, add comment to comment section
+		return response.json();
+	}).then(function (data) {
+		if (data.msg) {
+			document.getElementById('modal-text').innerText = data.msg;
 			toggleModal();
 		}
+		const commentsSection = document.getElementById('comments');
+		// Clear comments section
+		commentsSection.innerHTML = "";
+		// render comments section
+		// make a shallow copy of data.comments and then reverse it before looping through
+		data.comments.slice().reverse().forEach((comment) => {
+			const commentDiv = document.createElement('div');
+			commentDiv.className = 'comment-display';
+			commentDiv.setAttribute('aria-label', 'comment by user');
+			commentDiv.innerHTML = renderQuote(comment.comment, comment.username);
+			commentsSection.appendChild(
+				commentDiv
+			)
+		})
 	}).catch(function (error) {
 		console.error(error);
 	})
 });
+
+
+
+
+
+
+
+
+
+
 
