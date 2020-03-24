@@ -13,7 +13,7 @@ const windowOnClick = (event) => {
 window.addEventListener('click', windowOnClick);
 
 // Dynamically render comments section
-const renderQuote = (comment, user) => {
+const renderQuoteHTML = (comment, user) => {
     return  `
 		<blockquote>
 			<p>${comment}</p>
@@ -22,6 +22,23 @@ const renderQuote = (comment, user) => {
 			</footer>
 		</blockquote>
 	`;
+}
+
+const renderCommentSection = (comments) => {
+	const commentsSection = document.getElementById('comments');
+	// Clear comments section
+	commentsSection.innerHTML = "";
+	// render comments section
+	// make a shallow copy of data.comments and then reverse it before looping through
+	comments.slice().reverse().forEach((comment) => {
+		const commentDiv = document.createElement('div');
+		commentDiv.className = 'comment-display';
+		commentDiv.setAttribute('aria-label', 'comment by user');
+		commentDiv.innerHTML = renderQuoteHTML(comment.comment, comment.username);
+		commentsSection.appendChild(
+			commentDiv
+		)
+	})
 }
 
 // Handler for submitting a comment
@@ -47,26 +64,25 @@ commentForm.addEventListener('submit', function (e) {
 			document.getElementById('modal-text').innerText = data.msg;
 			toggleModal();
 		}
-		const commentsSection = document.getElementById('comments');
-		// Clear comments section
-		commentsSection.innerHTML = "";
-		// render comments section
-		// make a shallow copy of data.comments and then reverse it before looping through
-		data.comments.slice().reverse().forEach((comment) => {
-			const commentDiv = document.createElement('div');
-			commentDiv.className = 'comment-display';
-			commentDiv.setAttribute('aria-label', 'comment by user');
-			commentDiv.innerHTML = renderQuote(comment.comment, comment.username);
-			commentsSection.appendChild(
-				commentDiv
-			)
-		})
+		renderCommentSection(data.comments);
 	}).catch(function (error) {
 		console.error(error);
 	})
 });
 
+window.addEventListener('load', (event) => {
+	// render comments section
+	fetch('/comments', { method: 'GET'})
+		.then((response) => response.json())
+        .then((data) => {
+			renderCommentSection(data.comments);
+        })
+        .catch((error) => {
+           console.error('Error:', error);
+        })
+  });
 
+  // TODO error handling. Have a div maybe that says "sorry can't show comments right now"
 
 
 
