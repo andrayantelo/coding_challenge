@@ -54,14 +54,16 @@ app.post('/addComment', (request, response) => {
 	const username = request.body.username;
 
 	let msg = db.add({ username, comment });
+	
 	if (msg) {
 		logger.error(msg);
 		msg = 'There was an error.';
 	} else {
 		msg = 'Thanks for commenting!';
 	}
-	//return response.redirect(`/?message= + ${msg}`);
-	return response.send(msg);
+	
+	const comments = db.get();
+	return response.send({comments, msg});
 });
 
 app.listen(PORT, () => {
