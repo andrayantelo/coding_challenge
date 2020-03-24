@@ -46,7 +46,7 @@
             <button class="submitButton" type="submit">Submit</button>
         </form>
     </div>
-    <div class="right">
+    <div id="comments" class="right">
         <!-- Reverse order for newest first -->
         {% for comment in comments | reverse %}
         <div class="comment-display" aria-label="comment by user">
