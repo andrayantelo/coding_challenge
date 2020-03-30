@@ -12,7 +12,37 @@ const windowOnClick = (event) => {
 }
 window.addEventListener('click', windowOnClick);
 
-// Dynamically render comments section
+// Handle form submit
+const commentForm = document.getElementById('commentForm');
+
+commentForm.addEventListener('submit', function (e) {
+	e.preventDefault();
+	const formData = new FormData(this);
+	const searchParams = new URLSearchParams();
+
+	for (const pair of formData) {
+		searchParams.append(pair[0], pair[1]);
+	}
+	
+	fetch('/addComment', {
+		method: 'POST',
+		body: searchParams
+	}).then(function (response) {
+		// if successfull, add comment to comment section
+		return response.json();
+	}).then(function (data) {
+		if (data.msg) {
+			document.getElementById('modal-text').innerText = data.msg;
+			toggleModal();
+		}
+		const commentsSection = document.getElementById('comments');
+		commentsSection.innerHTML = data.commentsHTML;
+	}).catch(function (error) {
+		console.error(error);
+	})
+});
+
+/*// Dynamically render comments section
 const renderQuoteHTML = (comment, user) => {
     return  `
 		<blockquote>
@@ -70,7 +100,7 @@ commentForm.addEventListener('submit', function (e) {
 	})
 });
 
-window.addEventListener('load', (event) => {
+/*window.addEventListener('load', (event) => {
 	// render comments section
 	fetch('/comments', { method: 'GET'})
 		.then((response) => response.json())
@@ -81,7 +111,7 @@ window.addEventListener('load', (event) => {
            console.error('Error:', error);
         })
   });
-
+*/
   // TODO error handling. Have a div maybe that says "sorry can't show comments right now"
 
 
