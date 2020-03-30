@@ -38,11 +38,12 @@ nunjucks.configure(app.get('views'), {
 });
 
 app.get('/', (request, response) => {
+	const comments = db.get();
 	const options = {
 		pageTitle: 'Homepage',
 		logo: { url: 'assets/logo.png', description: 'Kink.com logo' },
 		upperimg: { url: 'assets/placeholder.png', description: 'Narwal with ball gag.' },
-		comments: db.get(),
+		commentsHTML: nunjucks.render('comments.njk', {comments})
 	};
 	return response.render('home', options);
 });
@@ -63,7 +64,8 @@ app.post('/addComment', (request, response) => {
 	}
 	
 	const comments = db.get();
-	return response.send({comments, msg});
+	const commentsHTML = nunjucks.render('comments.njk', {comments});
+	return response.send({commentsHTML, msg});
 });
 
 app.get('/comments', (request, response) => {
