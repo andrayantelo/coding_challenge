@@ -1,0 +1,11 @@
+<!-- Reverse order for newest first -->
+{% for comment in comments | reverse %}
+    <div class="comment-display" aria-label="comment by user">
+        <blockquote>
+            <p>{{ comment.comment }}</p>
+            <footer class="username-display">
+                <span aria-label="quoted user">— {{ comment.username }}</span>
+            </footer>
+        </blockquote>
+    </div>
+{% endfor %}
