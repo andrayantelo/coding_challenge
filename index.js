@@ -37,13 +37,17 @@ nunjucks.configure(app.get('views'), {
 	express: app,
 });
 
+const renderComments = () => {
+	return nunjucks.render('comments.njk', { comments: db.get() });
+};
+  
+
 app.get('/', (request, response) => {
-	const comments = db.get();
 	const options = {
 		pageTitle: 'Homepage',
 		logo: { url: 'assets/logo.png', description: 'Kink.com logo' },
 		upperimg: { url: 'assets/placeholder.png', description: 'Narwal with ball gag.' },
-		commentsHTML: nunjucks.render('comments.njk', {comments})
+		commentsHTML: renderComments()
 	};
 	return response.render('home', options);
 });
@@ -63,8 +67,7 @@ app.post('/addComment', (request, response) => {
 		msg = 'Thanks for commenting!';
 	}
 	
-	const comments = db.get();
-	const commentsHTML = nunjucks.render('comments.njk', {comments});
+	const commentsHTML = renderComments();
 	return response.send({commentsHTML, msg});
 });
 
