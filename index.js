@@ -68,11 +68,6 @@ app.post('/addComment', (request, response) => {
 	return response.send({commentsHTML, msg});
 });
 
-app.get('/comments', (request, response) => {
-	const comments = db.get();
-	return response.send({ comments })
-})
-
 app.listen(PORT, () => {
 	logger.log({ level: 'info', message: `listening on ${PORT}` });
 });
