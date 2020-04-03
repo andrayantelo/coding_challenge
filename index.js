@@ -6,6 +6,10 @@ const winston = require('winston');
 // database storing user comments
 const db = require('./db.js');
 
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer();
+
 const PORT = 3000;
 
 const logger = winston.createLogger({
@@ -28,6 +32,17 @@ app.use(morgan(':method :url :status :response-time ms', {
 // lets express know how to take the urlencoded
 // form data and turn it into a javascript object
 app.use(express.urlencoded({ extended: true }));
+
+// for parsing application/json
+app.use(bodyParser.json()); 
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+//form-urlencoded
+
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
 
 // Configure templating engine.
 app.set('views', path.join(__dirname, 'views'));

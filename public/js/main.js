@@ -17,16 +17,12 @@ const commentForm = document.getElementById('commentForm');
 
 commentForm.addEventListener('submit', function (e) {
 	e.preventDefault();
-	const formData = new FormData(this);
-	const searchParams = new URLSearchParams();
 
-	for (const pair of formData) {
-		searchParams.append(pair[0], pair[1]);
-	}
+	const formData = new FormData(this);
 	
 	fetch('/addComment', {
 		method: 'POST',
-		body: searchParams
+		body: formData
 	}).then(function (response) {
 		// if successfull, add comment to comment section
 		return response.json();
